@@ -39,7 +39,7 @@ class TabBarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      showPerformanceOverlay: true,
+//      showPerformanceOverlay: true,
       home: DefaultTabController(
         length: 5,
         child: Scaffold(
