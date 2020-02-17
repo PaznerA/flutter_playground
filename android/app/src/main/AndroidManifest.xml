@@ -11,7 +11,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="web_test"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="android:appComponentFactory" >
+        tools:replace="androidx.core.app.CoreComponentFactory"
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

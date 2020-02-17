@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer' as developer;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,9 @@ class TabBarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showPerformanceOverlay: true,
       home: DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
@@ -48,6 +50,7 @@ class TabBarDemo extends StatelessWidget {
                 Tab(icon: Icon(Icons.person)),
                 Tab(icon: Icon(Icons.image)),
                 Tab(icon: Icon(Icons.grid_on)),
+                Tab(icon: Icon(Icons.web)),
               ],
             ),
             title: Text('Tabs Demo'),
@@ -90,12 +93,27 @@ class TabBarDemo extends StatelessWidget {
                   );
                 }),
               ),
+              MyCustomForm(),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Future<CameraDescription> getCamera() async {
+  developer.log('startuju');
+  // Ensure that plugin services are initialized so that `availableCameras()`
+  // can be called before `runApp()`
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
+  return firstCamera;
 }
 
 class SecondRoute extends StatelessWidget {
@@ -117,11 +135,15 @@ class SecondRoute extends StatelessWidget {
           ),
           Center(
             child: RaisedButton(
-              onPressed: () {
+              onPressed: () async {
+                CameraDescription camera = await getCamera();
+                developer.log('Fotííí');
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TakePictureScreen()));
+                        builder: (context) => TakePictureScreen(
+                              camera: camera,
+                            )));
               },
               child: Text('Fotit'),
             ),
