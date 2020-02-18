@@ -54,7 +54,7 @@ class TabBarDemo extends StatelessWidget {
                 Tab(icon: Icon(Icons.web)),
               ],
             ),
-            title: Text('Tabs Demo'),
+            title: Text('Ukázková appka'),
           ),
           body: TabBarView(
             children: [
@@ -65,7 +65,7 @@ class TabBarDemo extends StatelessWidget {
                   ]),
                   TableRow(children: [
                     RaisedButton(
-                      child: Text('Přesměrovat na web'),
+                      child: Text('Podstránka s foťákem'),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -97,15 +97,20 @@ class TabBarDemo extends StatelessWidget {
               new WebviewScaffold(
                 url: "https://fitness14.polyweb.cz/novinky/",
                 appBar: new AppBar(
-                  title: const Text('Web'),
+                  title: const Text('Web fitness 14'),
+                  backgroundColor: Color.fromRGBO(107, 107, 107, 1),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.build),
+                      onPressed: () => {},
+                    )
+                  ],
                 ),
                 withLocalStorage: true,
-                initialChild: Container(
-                  color: Colors.redAccent,
-                  child: const Center(
-                    child: Text('Načítám.....'),
-                  ),
-                ),
+                withJavascript: true,
+                debuggingEnabled: true,
+                ignoreSSLErrors: true,
+                withZoom: true,
               ),
             ],
           ),
