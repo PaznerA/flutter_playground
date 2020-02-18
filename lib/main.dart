@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -93,7 +94,19 @@ class TabBarDemo extends StatelessWidget {
                   );
                 }),
               ),
-              MyCustomForm(),
+              new WebviewScaffold(
+                url: "https://fitness14.polyweb.cz/novinky/",
+                appBar: new AppBar(
+                  title: const Text('Web'),
+                ),
+                withLocalStorage: true,
+                initialChild: Container(
+                  color: Colors.redAccent,
+                  child: const Center(
+                    child: Text('Načítám.....'),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
